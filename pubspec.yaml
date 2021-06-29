@@ -1,0 +1,156 @@
+name: book_store
+description: A new Flutter application.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  dio: ^3.0.10
+  material_floating_search_bar: ^0.2.6
+  provider: ^4.3.2+3
+  http_parser: ^3.1.4
+  image_picker: ^0.6.7+17
+  permission_handler: ^5.0.1
+  intl: ^0.16.1
+  hexcolor: ^1.0.6
+  flutter_spinkit: ^4.1.2
+  flutter_svg: ^0.19.1
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.0
+  carousel_slider: ^1.3.0
+  # Service locator
+  get_it: ^3.1.0
+  # Bloc for state management
+  flutter_bloc: ^3.0.0
+  flutter_rating_bar: ^3.2.0+1
+  # Value equality
+  equatable: ^1.0.1
+  # Functional programming thingies
+  dartz: ^0.8.9
+  # Remote API
+  data_connection_checker: ^0.3.4
+  http: ^0.12.0+4
+  # Local cache
+  shared_preferences: ^0.5.6
+  #firebase ml
+  #firebase_ml_vision: ^0.6.0+2
+#  flutter_svg: ^0.19.1
+ # camera: ^0.5.8+7
+  #location
+ # location: ^3.0.0
+  #image_convert
+ # image: ^2.1.4
+ # path:
+ # cached_network_image: ^2.2.0
+ # flutter_datetime_picker: ^1.4.0
+ # carousel_slider: ^2.3.1
+  #signalR
+  #signalr_core: ^1.0.5
+  #signalr_client: ^0.1.6
+  #logging: ^0.11.4
+  #face
+  #path_provider: ^1.6.11
+ # tflite_flutter: ^0.4.1
+  #url launch
+  #url_launcher: ^5.4.2
+  #notify
+  #flutter_local_notifications: ^1.4.4+1
+  #forefround service
+  #foreground_service: ^2.0.1+1
+  #flutter_foreground_plugin: ^0.6.0
+ # google_maps_flutter: ^1.0.6
+  #progress bar
+  #percent_indicator: ^2.1.8
+  #calender
+  #date_format: ^1.0.9
+  #syncfusion_flutter_calendar: ^18.3.50
+  #dialog
+  #flutter_custom_dialog: ^1.0.20
+ # intl: ">=0.14.0"
+  #fluttertoast: ^7.1.8
+  #device_info: ^1.0.0
+  #search bar
+  #flutter_search_bar: ^2.1.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_native_splash: ^0.1.9
+  flutter_launcher_icons: "^0.8.1"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/logo/logo3.png
+  color_dark: "#1a1a1a"
+  image_dark: assets/logo/logo3.png
+  android: true
+  ios: true
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo/ic_launcher.png"
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  generate: true
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+     - assets/images/
+     - assets/logo/
+     - assets/icons/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
