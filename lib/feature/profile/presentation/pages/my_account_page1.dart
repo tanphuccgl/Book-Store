@@ -11,7 +11,6 @@ import 'package:book_store/feature/profile/data/models/profile_data.dart';
 import 'package:book_store/feature/profile/data/models/profile_response_model.dart';
 import 'package:book_store/feature/profile/presentation/manager/profile_bloc.dart';
 import 'package:book_store/feature/profile/presentation/pages/profile_page.dart';
-import 'package:book_store/feature/profile/presentation/widgets/body_my_account.dart';
 import 'package:book_store/feature/profile/presentation/widgets/body_my_account1.dart';
 import 'package:book_store/feature/profile/presentation/widgets/body_profile.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,7 +55,7 @@ class _MyAccountPage1State extends State<MyAccountPage1> {
                     color: kPrimaryOrangeColor,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, PageRoutes.profilePage);
+                   Navigator.pop(context);
                   },
                 ),
               ],
@@ -68,7 +67,7 @@ class _MyAccountPage1State extends State<MyAccountPage1> {
                   title: "Edit Profile",
                   onPressed2: () {
                     setState(() {
-                      Navigator.pushReplacementNamed(context, PageRoutes.cartPage);
+                      Navigator.pushNamed(context, PageRoutes.cartPage);
                     });
                   },
                 )),

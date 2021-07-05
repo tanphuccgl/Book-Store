@@ -4,7 +4,7 @@ import 'package:book_store/core/utils/loading_widget.dart';
 import 'package:book_store/core/utils/page_router.dart';
 import 'package:book_store/core/utils/spinkit.dart';
 import 'package:book_store/core/utils/terms_of_service.dart';
-import 'package:book_store/feature/onboarding/pages/onboarding_page.dart';
+import 'package:book_store/feature/onboarding/pages/onboarding_screen.dart';
 import 'package:book_store/feature/sign_in/data/models/login_data.dart';
 import 'package:book_store/feature/sign_in/presentation/pages/sign_in_page.dart';
 import 'package:book_store/feature/sign_in/presentation/widgets/body_login.dart';
@@ -298,6 +298,8 @@ class _BodyRegisterState extends State<BodyRegister> {
           title: "Succes",
           description: "Account successfully created",
           onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
             Navigator.pushReplacementNamed(context, PageRoutes.onBoardingPage);
           },
         );

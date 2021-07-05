@@ -40,7 +40,7 @@ class _Product7DetailPageState extends State<Product7DetailPage> {
           padding: EdgeInsets.only(left: 25,  right: 25),
           child: Column(
             children: [
-              header(context: context,title:"Tủ sách quý cô",onPressed2: (){ Navigator.pushReplacementNamed(context, PageRoutes.cartPage);} ),
+              header(context: context,title:"Tủ sách quý cô",onPressed2: (){ Navigator.pushNamed(context, PageRoutes.cartPage);} ),
               searchBarKindOfBook(context: context,),
               _buildBody(context)
             ],

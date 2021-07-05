@@ -210,7 +210,7 @@ class _ItemCartState extends State<ItemCart> {
           tenSach,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+             fontWeight: FontWeight.bold, fontSize: 16),
           maxLines: 1,
         ),
       ),
@@ -223,7 +223,7 @@ class _ItemCartState extends State<ItemCart> {
       child: Text.rich(
         TextSpan(
           text: "₫${price.format(int.parse(giaBia))}",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(),
         ),
       ),
     );

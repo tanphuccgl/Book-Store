@@ -50,7 +50,7 @@ class _KindOfBookPageState extends State<KindOfBookPage> {
         children: [
           header(context: context,title:'Kind of Book' ,onPressed: (){},onPressed2: () {
             setState(() {
-              Navigator.pushReplacementNamed(context, PageRoutes.cartPage);
+              Navigator.pushNamed(context, PageRoutes.cartPage);
             });
           }),
           searchBarKindOfBook(context: context),
@@ -113,49 +113,49 @@ class _KindOfBookPageState extends State<KindOfBookPage> {
           title: "Skybooks",
           image: "assets/images/a5.png",
           onTap: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.product1DetailPage);
+            Navigator.pushNamed(context, PageRoutes.product1DetailPage);
           },
         ),
         _itemGridView(
           title: "Skycomics",context: context,
           image: "assets/images/a6.png",
           onTap: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.product2DetailPage);
+            Navigator.pushNamed(context, PageRoutes.product2DetailPage);
           },
         ),
         _itemGridView(
           title: "Skynovel",context: context,
           image: "assets/images/a7.png",
           onTap: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.product3DetailPage);
+            Navigator.pushNamed(context, PageRoutes.product3DetailPage);
           },
         ),
         _itemGridView(
           title: "Skymommy",context: context,
           image: "assets/images/a8.png",
           onTap: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.product4DetailPage);
+            Navigator.pushNamed(context, PageRoutes.product4DetailPage);
           },
         ),
         _itemGridView(
           title: "Tủ sách sống khác",context: context,
           image: "assets/images/a9.png",
           onTap: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.product5DetailPage);
+            Navigator.pushNamed(context, PageRoutes.product5DetailPage);
           },
         ),
         _itemGridView(
           title: "Tủ sách chữa lành",context: context,
           image: "assets/images/a10.png",
           onTap: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.product6DetailPage);
+            Navigator.pushNamed(context, PageRoutes.product6DetailPage);
           },
         ),
         _itemGridView(
           title: "Tủ sách quý cô",context: context,
           image: "assets/images/a11.png",
           onTap: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.product7DetailPage);
+            Navigator.pushNamed(context, PageRoutes.product7DetailPage);
           },
         ),
       ],

@@ -1,6 +1,6 @@
 import 'package:book_store/core/utils/constants.dart';
 import 'package:book_store/core/utils/page_router.dart';
-import 'package:book_store/feature/onboarding/pages/onboading_screen.dart';
+import 'package:book_store/feature/onboarding/pages/onboading_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ Widget appBarSignIn({BuildContext context})
         color: kPrimaryOrangeColor,
       ),
       onPressed: () {
-        Navigator.pushReplacementNamed(context, PageRoutes.onBoardingPage);
+      Navigator.pop(context);
       },
     ),
     backgroundColor: Colors.transparent,

@@ -6,11 +6,10 @@ import 'package:book_store/core/utils/custom_alert_dialog/alert_dialog2.dart';
 import 'package:book_store/core/utils/page_router.dart';
 import 'package:book_store/core/utils/spinkit.dart';
 import 'package:book_store/feature/cart/presentation/pages/cart_page.dart';
-import 'package:book_store/feature/onboarding/pages/onboading_screen.dart';
-import 'package:book_store/feature/onboarding/pages/onboarding_page.dart';
+import 'package:book_store/feature/onboarding/pages/onboading_page.dart';
+import 'package:book_store/feature/onboarding/pages/onboarding_screen.dart';
 import 'package:book_store/feature/product/presentation/widgets/header_kind_of_book.dart';
 import 'package:book_store/feature/profile/data/models/profile_response_model.dart';
-import 'package:book_store/feature/profile/presentation/pages/my_account_page.dart';
 import 'package:book_store/feature/profile/presentation/pages/my_account_page1.dart';
 import 'package:book_store/main.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,95 +39,109 @@ class _BodyProfileState extends State<BodyProfile> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return data != null
         ? Column(children: [
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Stack(
-                children: [
-                  Center(child: _buildImage()),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: header(
-                        context: context,
-                        title: '',
-                        onPressed: () {},
-                        onPressed2: () {
-                          setState(() {
-                            Navigator.pushReplacementNamed(context, PageRoutes.cartPage);
-                          });
-                        }),
-                  ),
-                ],
-              ),
+      Padding(
+        padding: EdgeInsets.only(top: 20),
+        child: Stack(
+          children: [
+            Center(child: _buildImage()),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: header(
+                  context: context,
+                  title: '',
+                  onPressed: () {},
+                  onPressed2: () {
+                    setState(() {
+                      Navigator.pushNamed(
+                          context, PageRoutes.cartPage);
+                    });
+                  }),
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  _buildMenu(
-                    title: "My Account",
-                    icon: "assets/icons/user.png",
-                    onPress: () => {
-                    Navigator.pushReplacementNamed(context, PageRoutes.myAccountPage)
-                    },
-                  ),
-                  _buildMenu(
-                    title: "Purchase Order",
-                    icon: "assets/icons/oder.png",
-                    onPress: () =>{
-                      Navigator.pushReplacementNamed(context, PageRoutes.cartedPage)
-                    },
-                  ),
-                  _buildMenu(
-                    title: "Settings",
-                    icon: "assets/icons/settings.png",
-                    onPress: () =>{    Navigator.pushReplacementNamed(context, PageRoutes.settingsPage)},
-                  ),
-                  _buildMenu(
-                    title: "Help Center",
-                    icon: "assets/icons/help.png",
-                    onPress: () {},
-                  ),
-                  _buildMenu(
-                    title: "Log Out",
-                    icon: "assets/icons/logout.png",
-                    onPress: () {
-                      AlertDialog2.yesAbortDialog(
-                          context: context,
-                          title: "EXIT",
-                          body: "Do you want to sign out?",onPressed: (){
-                        logout();
-                        Navigator.pushReplacementNamed(context, PageRoutes.onBoardingPage);
-                      });
+          ],
+        ),
+      ),
+      Expanded(
+        child: Column(
+          children: [
+            _buildMenu(
+              title: "My Account",
+              icon: "assets/icons/user.png",
+              onPress: () =>
+              {
+                Navigator.pushNamed(
+                    context, PageRoutes.myAccountPage)
+              },
+            ),
+            _buildMenu(
+              title: "Purchase Order",
+              icon: "assets/icons/oder.png",
+              onPress: () =>
+              {
+                Navigator.pushNamed(context, PageRoutes.cartedPage)
+              },
+            ),
+            _buildMenu(
+              title: "Settings",
+              icon: "assets/icons/settings.png",
+              onPress: () =>
+              {
+                Navigator.pushNamed(context, PageRoutes.settingsPage)
+              },
+            ),
+            _buildMenu(
+              title: "About Us",
+              icon: "assets/icons/help.png",
+              onPress: () =>{
+                Navigator.pushNamed(context, PageRoutes.aboutUsPage)
+              },
+            ),
+            _buildMenu(
+              title: "Log Out",
+              icon: "assets/icons/logout.png",
+              onPress: () {
+                AlertDialog2.yesAbortDialog(
+                    context: context,
+                    title: "EXIT",
+                    body: "Do you want to sign out?", onPressed: () {
+                  logout();
+                  Navigator.pushNamedAndRemoveUntil(context, PageRoutes.onBoardingPage,(Route<dynamic> route) => false);
 
-                    },
-                  ),
-                ],
-              ),
+
+                });
+              },
             ),
-          ])
+          ],
+        ),
+      ),
+    ])
         : Center(
-            child: SpinkitLoading(),
-          );
+      child: SpinkitLoading(),
+    );
   }
 
   Widget _buildImage() {
-    Size size= MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
-    return SizedBox(
-      height: size.height/5.565217391304348,
-      width: size.width/3.130434782608696,
+    return Container(
+      height: size.height / 5.565217391304348,
+      width: size.width / 3.130434782608696,
       child: Stack(
         fit: StackFit.expand,
         overflow: Overflow.visible,
         children: [
           data.data.imagePerson != null
-              ? CircleAvatar(
-                  backgroundImage: NetworkImage(data?.data?.imagePerson ??
-                      "https://www.freeiconspng.com/uploads/red-circular-image-error-0.png"),
-                )
+              ? CircleAvatar(backgroundColor: Colors.transparent,
+            backgroundImage: NetworkImage(data?.data?.imagePerson ??
+                "https://www.freeiconspng.com/uploads/red-circular-image-error-0.png"),
+          )
               : SpinkitLoading(),
 
         ],
@@ -137,7 +150,9 @@ class _BodyProfileState extends State<BodyProfile> {
   }
 
   Widget _buildMenu({String title, String icon, Function onPress}) {
-    Size size= MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -150,14 +165,14 @@ class _BodyProfileState extends State<BodyProfile> {
           children: [
             Image.asset(
               icon,
-              width: size.width/16.36363636363636,
+              width: size.width / 16.36363636363636,
             ),
-            SizedBox(width: size.width/18),
+            SizedBox(width: size.width / 18),
             Expanded(
                 child: Text(
-              title,
-              style: TextStyle(color: Colors.white),
-            )),
+                  title,
+                  style: TextStyle(color: Colors.white),
+                )),
             Icon(
               Icons.arrow_forward_ios,
               color: kPrimaryWhiteColor,

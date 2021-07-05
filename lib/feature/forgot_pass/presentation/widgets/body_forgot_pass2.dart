@@ -40,7 +40,7 @@ class _BodyForgotPass2State extends State<BodyForgotPass2> {
                   Text(
                     "Verification Codes",
                     style: TextStyle(
-                        color: kPrimaryBlackColor,
+
                         fontSize: 25,
                         fontWeight: FontWeight.w700),
                   ),
@@ -209,12 +209,12 @@ class _BodyForgotPass2State extends State<BodyForgotPass2> {
                   builder: (cxt) => RaisedButton(
                     elevation: 0,
                     onPressed: () {
-                      if (code.length != 0 &&
+                      if (
                           code != null &&
-                          pass.length != 0 &&
+
                           pass != null &&
                           confirmPw == pass &&
-                          confirmPw.length != 0 &&
+
                           confirmPw != null) {
                         putNewPw(
                             email: widget.email,
@@ -294,11 +294,15 @@ class _BodyForgotPass2State extends State<BodyForgotPass2> {
       title: "SUCCESS",
       description: "Change password successfully",
       onPressed: () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
+
         Navigator.pushReplacementNamed(context, PageRoutes.onBoardingPage);
       },
     );
     showDialog(
-        context: context,
+        context: context,barrierDismissible: false,
         builder: (context) {
           return alert;
         });

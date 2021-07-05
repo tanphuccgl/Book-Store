@@ -48,7 +48,12 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
 
   bool _checkBox = true;
   bool _checkBox2 = false;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -143,24 +148,57 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
                       name = value;
                     },
                   ),
-                  _sex(
-                    context: context,
-                    value: _checkBox,
-                    value2: _checkBox2,
-                    onChange1: (value) {
-                      setState(() {
-                        _checkBox = value;
-                        _checkBox2 = !_checkBox;
-                      });
-                    },
-                    onChange2: (value) {
-                      setState(() {
-                        _checkBox2 = value;
-                        _checkBox = !_checkBox2;
-                      });
-                    },
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "     Sex: ${widget.data.data.sex==0?"Female":"Male"}",
+                        style:
+                        TextStyle(color: kPrimaryOrangeColor, fontSize: 13),
+                      ),
+                      SizedBox(
+                        width: size.width / 7.2,
+                      ),
+                   _sex(
+                        context: context,
+                        value: _checkBox,
+                        value2: _checkBox2,
+                        onChange1: (value) {
+                          setState(() {
+                            _checkBox = value;
+                            _checkBox2 = !_checkBox;
+                          });
+                        },
+                        onChange2: (value) {
+                          setState(() {
+                            _checkBox2 = value;
+                            _checkBox = !_checkBox2;
+                          });
+                        },
+                      ),
+                    ],
                   ),
-                  buildBirthday(birthday: widget.data.data.dateBirth),
+
+                  Padding(padding: EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+                        Text(
+                          "     Date Birth",
+                          style:
+                              TextStyle(color: kPrimaryOrangeColor, fontSize: 13),
+                        ),
+                        SizedBox(
+                          width: size.width / 7.2,
+                        ),
+                        DatePickerWidget(
+                          data: widget.data,
+                        ),
+                      ],
+                    ),
+                  ),
+
                   // _buildTextField(
                   //     title: "Date Birth",
                   //     info: widget.data?.data?.dateBirth ?? "Chưa có dữ liệu",
@@ -171,7 +209,7 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
                       title: "Number Phone",
                       textEditingController: _phoneNumberText,
                       keyboardType: TextInputType.phone,
-                      maxLength: 13,
+                      maxLength: 10,
                       maxLines: 1,
                       info: widget.data?.data?.phoneNumber ?? "Chưa có dữ liệu",
                       onChange: (value) {
@@ -203,24 +241,40 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, PageRoutes.profilePage);
+                       Navigator.pop(context);
                         },
                         child: Text("CANCEL",
                             style: TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 2.2,
-                                color: Colors.black)),
+                              fontSize: 14,
+                              letterSpacing: 2.2,
+                            )),
                       ),
                       RaisedButton(
                         onPressed: () {
-                          setState(() {
+
                             if (_checkBox) {
                               sex = "1";
                             } else {
                               sex = "0";
                             }
-
+                            print(dateBirth);
+                           if(name==null)
+                             {
+                               name=widget.data.data.name;
+                             }if(address==null)
+                               {
+                                 address=widget.data.data.address;
+                               }if(phoneNumber==null)
+                                 {
+                                   phoneNumber=widget.data.data.phoneNumber;
+                                 }if(dateBirth==null)
+                                   {
+                                     dateBirth=widget.data.data.dateBirth;
+                                   }if(introduce==null)
+                                     {
+                                       introduce=widget.data.data.introduce;
+                                     }
+                            print(dateBirth+"!");
                             changeProfile(
                                 name: name,
                                 address: address,
@@ -230,7 +284,7 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
                                 introduce: introduce,
                                 function: showSuccess,
                                 function2: showFailed);
-                          });
+
                         },
                         color: kPrimaryOrangeColor,
                         padding: EdgeInsets.symmetric(horizontal: 35),
@@ -249,9 +303,6 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
                   ),
                   SizedBox(
                     height: size.height / 32,
-                  ),
-                  TodoCard(
-                    data: widget.data,
                   ),
                 ],
               ),
@@ -288,7 +339,7 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
                 ),
                 Container(
                   child: Text(
-                    "Nam",
+                    "Male",
                     style: TextStyle(
                         color: Colors.grey,
                         fontSize: 12,
@@ -312,7 +363,7 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
                 ),
                 Container(
                   child: Text(
-                    "Nu",
+                    "Female",
                     style: TextStyle(
                         color: Colors.grey,
                         fontSize: 12,
@@ -369,11 +420,13 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
       title: "Succes",
       description: "Edit profile successfully ",
       onPressed: () {
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
         Navigator.pushReplacementNamed(context, PageRoutes.profilePage);
       },
     );
     showDialog(
-        context: context,
+        context: context,barrierDismissible: false,
         builder: (context) {
           return alert;
         });
@@ -383,7 +436,7 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
     var alert = new AlertDialog1(
       image: "cancel",
       title: "Failed",
-      description: "Edit profile fail ",
+      description: "Edit profile fail",
       onPressed: () {
         Navigator.of(context).pop();
       },
@@ -394,12 +447,4 @@ class _BodyMyAccount1State extends State<BodyMyAccount1> {
           return alert;
         });
   }
-
-  Widget buildBirthday({String birthday}) => BirthdayWidget(
-      birthday: birthday != null
-          ? DateFormat("dd-MM-yyyy").parse(birthday)
-          : DateFormat("dd-MM-yyyy").parse("00000000"),
-      onChangedBirthday: (dateOfBirth) => setState(
-            () => birthday = dateOfBirth,
-          ));
 }

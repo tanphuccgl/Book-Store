@@ -11,8 +11,8 @@ Widget appBarHome({BuildContext context}) {
     elevation: 0,leading: Icon(Icons.arrow_back,color: Colors.red,size: 1,),
     flexibleSpace: Container(
       width: size.width,
-      height: size.height/16.4102564102564,
-      margin: EdgeInsets.only(left: 25, right: 25, top: 18),
+      height: size.height/18.28571428571429,
+      margin: EdgeInsets.only(left: 25, right: 25, top: 10),
       child: searchBarHome(context: context),
     ),
 

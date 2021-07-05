@@ -64,17 +64,14 @@ class _BodyHomeState extends State<BodyHome> {
                           icon: Icon(Icons.notifications_active_outlined,
                               color: kPrimaryOrangeColor),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchPage()));
+
                           }),
                       IconButton(
                           icon: Icon(Icons.shopping_cart_outlined,
                               color: kPrimaryOrangeColor),
                           onPressed: () {
                             setState(() {
-                              Navigator.pushReplacementNamed(
+                              Navigator.pushNamed(
                                   context, PageRoutes.cartPage);
                             });
                           })

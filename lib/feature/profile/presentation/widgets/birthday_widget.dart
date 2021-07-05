@@ -1,106 +1,147 @@
+import 'package:book_store/feature/profile/data/models/profile_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class BirthdayWidget extends StatefulWidget {
-  final DateTime birthday;
-  final ValueChanged<String> onChangedBirthday;
+class DatePickerWidget extends StatefulWidget {
+  final ProfileResponseModel data;
 
-  const BirthdayWidget({
-    Key key,
-    @required this.birthday,
-    @required this.onChangedBirthday,
-  }) : super(key: key);
+  const DatePickerWidget({Key key, this.data}) : super(key: key);
 
   @override
-  _BirthdayWidgetState createState() => _BirthdayWidgetState();
+  _DatePickerWidgetState createState() => _DatePickerWidgetState();
 }
 
-class _BirthdayWidgetState extends State<BirthdayWidget> {
-  final controller = TextEditingController();
-  final focusNode = FocusNode();
+class _DatePickerWidgetState extends State<DatePickerWidget> {
 
-  @override
+
+  DateTime date;
+  var formatter = new DateFormat('dd-MM-yyyy');
+
+  String getText() {
+    if (date == null) {
+      return 'Select Date';
+    } else {
+      widget.data.data.dateBirth=DateFormat('MM/dd/yyyy').format(date);
+      return DateFormat('MM/dd/yyyy').format(date);
+      // return '${date.month}/${date.day}/${date.year}';
+    }
+  }
+
+@override
   void initState() {
+    // TODO: implement initState
     super.initState();
+    if(widget.data.data.dateBirth=="")
+      {
+print("Aaa");
+      }else
+        { print("bbb");
+          date=DateFormat("MM/dd/yyyy").parse(widget.data.data.dateBirth);
 
-    setDate();
+
+        }
+
   }
-
   @override
-  void didUpdateWidget(covariant BirthdayWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  Widget build(BuildContext context) {
 
-    setDate();
-  }
+    return ButtonHeaderWidget(
+    title: '',
+    text: getText(),
+    onClicked: () => pickDate(context),
+  );}
 
-  void setDate() => setState(() {
-    controller.text = widget.birthday == null
-        ? ''
-        : DateFormat.yMd().format(widget.birthday);
-  });
-
-  @override
-  Widget build(BuildContext context) => FocusBuilder(
-    onChangeVisibility: (isVisible) {
-      if (isVisible) {
-        selectDate(context);
-        //
-      } else {
-        FocusScope.of(context).requestFocus(FocusNode());
-      }
-    },
-    focusNode: focusNode,
-    builder: (hasFocus) => TextFormField(
-      controller: controller,
-      validator: (value) => value.isEmpty ? 'Is Required' : null,
-      decoration: InputDecoration(
-        prefixText: ' ',
-        hintText: 'Your birthday',
-        prefixIcon: Icon(Icons.calendar_today_rounded),
-        border: OutlineInputBorder(),
-      ),
-    ),
-  );
-
-  Future selectDate(BuildContext context) async {
-    final birthday = await showDatePicker(
+  Future pickDate(BuildContext context) async {
+    final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
       context: context,
-      initialDate: widget.birthday ?? DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2100),
+      initialDate: date ?? initialDate,
+      firstDate: DateTime(DateTime.now().year - 50),
+      lastDate: DateTime(DateTime.now().year + 50),
     );
 
-    if (birthday == null) return;
+    if (newDate == null) return;
 
-    widget.onChangedBirthday(DateFormat("yyyy-MM-dd hh:mm:ss").format(birthday));
+    setState(() => date = newDate);
   }
 }
+class ButtonHeaderWidget extends StatelessWidget {
+  final String title;
+  final String text;
+  final VoidCallback onClicked;
 
-class FocusBuilder extends StatefulWidget {
-  final FocusNode focusNode;
-  final Widget Function(bool hasFocus) builder;
-  final ValueChanged<bool> onChangeVisibility;
-
-  const FocusBuilder({
-    @required this.focusNode,
-    @required this.builder,
-    @required this.onChangeVisibility,
+  const ButtonHeaderWidget({
     Key key,
+    @required this.title,
+    @required this.text,
+    @required this.onClicked,
   }) : super(key: key);
 
   @override
-  _FocusBuilderState createState() => _FocusBuilderState();
+  Widget build(BuildContext context) => HeaderWidget(
+    title: title,
+    child: ButtonWidget(
+      text: text,
+      onClicked: onClicked,
+    ),
+  );
 }
 
-class _FocusBuilderState extends State<FocusBuilder> {
+class ButtonWidget extends StatelessWidget {
+  final String text;
+  final VoidCallback onClicked;
+
+  const ButtonWidget({
+    Key key,
+    @required this.text,
+    @required this.onClicked,
+  }) : super(key: key);
+
   @override
-  Widget build(BuildContext context) => GestureDetector(
-    behavior: HitTestBehavior.opaque,
-    onTap: () => widget.onChangeVisibility(true),
-    child: Focus(
-      focusNode: widget.focusNode,
-      onFocusChange: widget.onChangeVisibility,
-      child: widget.builder(widget.focusNode.hasFocus),
-    ),
+  Widget build(BuildContext context) {
+    Size size= MediaQuery.of(context).size;
+    return Container(width:size.width/3.6 ,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size.fromHeight(40),
+          primary: Colors.white,
+        ),
+        child: FittedBox(
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          ),
+        ),
+        onPressed: onClicked,
+      ),
+    );
+  }
+}
+
+class HeaderWidget extends StatelessWidget {
+  final String title;
+  final Widget child;
+
+  const HeaderWidget({
+    Key key,
+    @required this.title,
+    @required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        title,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(height: 8),
+      child,
+    ],
   );
 }

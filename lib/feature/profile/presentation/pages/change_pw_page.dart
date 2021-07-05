@@ -40,8 +40,7 @@ class _ChangePwPageState extends State<ChangePwPage> {
             color: kPrimaryOrangeColor,
           ),
           onPressed: () {
-            // Navigator.of(context).pop();
-            Navigator.pushReplacementNamed(context, PageRoutes.settingsPage);
+             Navigator.of(context).pop();
           },
         ),
         backgroundColor: Colors.transparent,
@@ -59,7 +58,7 @@ class _ChangePwPageState extends State<ChangePwPage> {
                     Text(
                       "Change The Password",
                       style: TextStyle(
-                          color: kPrimaryBlackColor,
+
                           fontSize: 25,
                           fontWeight: FontWeight.w700),
                     ),
@@ -309,12 +308,14 @@ class _ChangePwPageState extends State<ChangePwPage> {
       title: "SUCCESS",
       description: "Change password successfully",
       onPressed: () {
+Navigator.pop(context);
+Navigator.pop(context);
 
         Navigator.pushReplacementNamed(context, PageRoutes.settingsPage);
       },
     );
     showDialog(
-        context: context,
+        context: context,barrierDismissible: false,
         builder: (context) {
           return alert;
         });

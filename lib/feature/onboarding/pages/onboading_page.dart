@@ -38,7 +38,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     child: _button(
                       title: "Sign In",
                       onPressed: () {
-                       Navigator.pushReplacementNamed(context, PageRoutes.signIn);
+                       Navigator.pushNamed(context, PageRoutes.signIn);
                       },
                     ),
                   ),
@@ -47,7 +47,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     child: _button(
                       title: "Sign Up",
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, PageRoutes.signUp);
+                        Navigator.pushNamed(context, PageRoutes.signUp);
                       },
                     ),
                   ),

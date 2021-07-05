@@ -6,7 +6,7 @@ Widget searchBarKindOfBook({BuildContext context}) {
   return Container(
     child: searchBarHome(context: context),
     width: size.width,
-    height: size.height/16.41025641025641,
+    height: size.height/18.28571428571429,
     margin: EdgeInsets.only(top: 5, bottom: 15),
   );
 }

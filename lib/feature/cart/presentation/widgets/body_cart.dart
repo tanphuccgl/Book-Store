@@ -62,6 +62,7 @@ class _BodyCartState extends State<BodyCart> {
               total:'${price.format(int.parse(tong))}' ?? "0",
               onPressed1: () {},
               onPressed: () {
+
                 postPayment();
                 showSuccess();
               },
@@ -103,6 +104,17 @@ class _BodyCartState extends State<BodyCart> {
                               idProduct:
                                   widget.cartResponseModel.cart[index].sId,
                               amount: a.toString());
+                          ApiCart.getData().then((value1) {
+                            setState(() {
+                              widget.cartResponseModel.tongTienthanhtoan = value1.tongTienthanhtoan;
+                            });
+                            tong = widget.cartResponseModel.tongTienthanhtoan;
+                            print("1 " + tong.toString());
+                          });
+
+                          Future.delayed(Duration(milliseconds: 500), () {
+                            print("2 " + tong.toString());
+                          });
                         }),
                     onTru: () => truSanPham(
                         amount: widget.cartResponseModel.cart[index].amount,
@@ -127,6 +139,17 @@ class _BodyCartState extends State<BodyCart> {
                               idProduct:
                                   widget.cartResponseModel.cart[index].sId,
                               amount: a.toString());
+                          ApiCart.getData().then((value1) {
+                            setState(() {
+                              widget.cartResponseModel.tongTienthanhtoan = value1.tongTienthanhtoan;
+                            });
+                            tong = widget.cartResponseModel.tongTienthanhtoan;
+                            print("1 " + tong.toString());
+                          });
+
+                          Future.delayed(Duration(milliseconds: 500), () {
+                            print("2 " + tong.toString());
+                          });
                         }),
                     onPressedCheck: () => onPressedCheck(
                         id: widget.cartResponseModel.cart[index].sId),
@@ -148,24 +171,18 @@ class _BodyCartState extends State<BodyCart> {
       putIsStatus(idProduct: id);
 
       // _show = !_show;
-      print("1");
 
       //   widget.onRefreshCart();
       ApiCart.getData().then((value1) {
         setState(() {
-          print("2");
           widget.cartResponseModel.tongTienthanhtoan = value1.tongTienthanhtoan;
         });
-        print("3");
         tong = widget.cartResponseModel.tongTienthanhtoan;
         print("1 " + tong.toString());
-        print("4");
       });
 
       Future.delayed(Duration(milliseconds: 500), () {
-        print("5");
         print("2 " + tong.toString());
-        print("6");
       });
     });
   }
@@ -322,11 +339,12 @@ class _BodyCartState extends State<BodyCart> {
       title: "SUCCESS",
       description: "Payment success",
       onPressed: () {
+        Navigator.pop(context);
         Navigator.pushReplacementNamed(context, PageRoutes.cartPage);
       },
     );
     showDialog(
-        context: context,
+        context: context,barrierDismissible: false,
         builder: (context) {
           return alert;
         });
@@ -344,7 +362,7 @@ class _BodyCartState extends State<BodyCart> {
       },
     );
     showDialog(
-        context: context,
+        context: context, barrierDismissible: false,
         builder: (context) {
           return alert;
         });

@@ -1,226 +1,260 @@
+import 'dart:async';
 
+
+import 'package:book_store/core/api/api_product.dart';
 import 'package:book_store/core/utils/constants.dart';
+import 'package:book_store/core/utils/spinkit.dart';
+import 'package:book_store/feature/product/data/models/product_data.dart';
+import 'package:book_store/feature/product/data/models/product_response_model.dart';
+import 'package:book_store/feature/product/presentation/widgets/product_detail.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-
-
 
 class SearchPage extends StatefulWidget {
+  static const String routeName = '/SearchRoomPage';
+
+  const SearchPage({Key key}) : super(key: key);
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  static const historyLength = 5;
-
-  List<String> _searchHistory = [
-    'fuchsia',
-    'flutter',
-    'widgets',
-    'resocoder',
-  ];
-
-  List<String> filteredSearchHistory;
-
-  String selectedTerm;
-
-  List<String> filterSearchTerms({
-    @required String filter,
-  }) {
-    if (filter != null && filter.isNotEmpty) {
-      return _searchHistory.reversed
-          .where((term) => term.startsWith(filter))
-          .toList();
-    } else {
-      return _searchHistory.reversed.toList();
-    }
-  }
-
-  void addSearchTerm(String term) {
-    if (_searchHistory.contains(term)) {
-      putSearchTermFirst(term);
-      return;
-    }
-
-    _searchHistory.add(term);
-    if (_searchHistory.length > historyLength) {
-      _searchHistory.removeRange(0, _searchHistory.length - historyLength);
-    }
-
-    filteredSearchHistory = filterSearchTerms(filter: null);
-  }
-
-  void deleteSearchTerm(String term) {
-    _searchHistory.removeWhere((t) => t == term);
-    filteredSearchHistory = filterSearchTerms(filter: null);
-  }
-
-  void putSearchTermFirst(String term) {
-    deleteSearchTerm(term);
-    addSearchTerm(term);
-  }
-
-  FloatingSearchBarController controller;
+  ProductResponseModel productResponseModel;
+  List<ProductData> products = [];
+  String query = '';
+  Timer debouncer;
 
   @override
   void initState() {
     super.initState();
-    controller = FloatingSearchBarController();
-    filteredSearchHistory = filterSearchTerms(filter: null);
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+    ApiProduct.getData().then((value) {
+      setState(() {
+        productResponseModel = value;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FloatingSearchBar(
-        controller: controller,
-        body: FloatingSearchBarScrollNotifier(
-          child: SearchResultsListView(
-            searchTerm: selectedTerm,
-          ),
-        ),
-        transition: CircularFloatingSearchBarTransition(),
-        physics: BouncingScrollPhysics(),
-        title: Text(
-          selectedTerm ?? 'Search book...',
+    Size size = MediaQuery.of(context).size;
 
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: kPrimaryOrangeColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        hint: 'Search and find out...',
-        actions: [
-          FloatingSearchBarAction.searchToClear(color: kPrimaryOrangeColor,),
-        ],
-        onQueryChanged: (query) {
-          setState(() {
-            filteredSearchHistory = filterSearchTerms(filter: query);
-          });
-        },
-        onSubmitted: (query) {
-          setState(() {
-            addSearchTerm(query);
-            selectedTerm = query;
-          });
-          controller.close();
-        },
-        builder: (context, transition) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Material(
-              color: Colors.white,
-              elevation: 4,
-              child: Builder(
-                builder: (context) {
-                  if (filteredSearchHistory.isEmpty &&
-                      controller.query.isEmpty) {
-                    return Container(
-                      height: 56,
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Start searching',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    );
-                  } else if (filteredSearchHistory.isEmpty) {
-                    return ListTile(
-                      title: Text(controller.query),
-                      leading: const Icon(Icons.search,color: Colors.orangeAccent,),
+      ),
+      body: productResponseModel != null
+          ? Padding(
+        padding: EdgeInsets.only(left: 25, right: 25),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(
+                  "Search Book",
+                  style: TextStyle(
+                      color: kPrimaryOrangeColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: size.height / 64,
+            ),
+            buildSearch(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+
+                  return Padding(
+                    padding: EdgeInsets.all(5),
+                    child: GestureDetector(
                       onTap: () {
-                        setState(() {
-                          addSearchTerm(controller.query);
-                          selectedTerm = controller.query;
-                        });
-                        controller.close();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductDetail(
+                                  data: product,
+                                )));
                       },
-                    );
-                  } else {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: filteredSearchHistory
-                          .map(
-                            (term) => ListTile(
-                          title: Text(
-                            term,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          leading: const Icon(Icons.history,color: Colors.orangeAccent,),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.clear,color: Colors.orangeAccent,),
-                            onPressed: () {
-                              setState(() {
-                                deleteSearchTerm(term);
-                              });
-                            },
-                          ),
-                          onTap: () {
-                            setState(() {
-                              putSearchTermFirst(term);
-                              selectedTerm = term;
-                            });
-                            controller.close();
-                          },
+                      child: Container(
+                        width: size.width / 3.6,
+                        margin: EdgeInsets.only(bottom: 19),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _imageProduct(url: product.urlImage, context: context),
+                            SizedBox(width:size.width/18 ,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _nameProduct(name: product.tenSach, context: context),
+                                _nameAuthor(author: product.tacGia, context: context),
+                                _priceProduct(pricee: product.giaBia, context: context)
+                              ],
+                            )
+                          ],
                         ),
-                      )
-                          .toList(),
-                    );
-                  }
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
-          );
-        },
+          ],
+        ),
+      )
+          : Center(
+        child: SpinkitLoading(),
+      ),
+    );
+  }
+
+  Widget buildSearch() => SearchWidget(
+    text: query,
+    hintText: 'Book title?',
+    onChanged: searchBook,
+  );
+
+  Future searchBook(String query) async {
+    final products = await productResponseModel.data.where((e) {
+      final a = e.tenSach.toLowerCase();
+      final b = query.toLowerCase();
+      return a.contains(b);
+    }).toList();
+
+    setState(() {
+      this.query = query;
+      this.products = products;
+    });
+  }
+}
+
+class SearchWidget extends StatefulWidget {
+  final String text;
+  final ValueChanged<String> onChanged;
+  final String hintText;
+
+  const SearchWidget({
+    Key key,
+    @required this.text,
+    @required this.onChanged,
+    @required this.hintText,
+  }) : super(key: key);
+
+  @override
+  _SearchWidgetState createState() => _SearchWidgetState();
+}
+
+class _SearchWidgetState extends State<SearchWidget> {
+  final controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    Size size= MediaQuery.of(context).size;
+    final styleActive = TextStyle(color: Colors.black);
+    final styleHint = TextStyle(color: Colors.black54);
+    final style = widget.text.isEmpty ? styleHint : styleActive;
+
+    return Container(
+      height: size.height/15.23809523809524,
+      margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+        border: Border.all(color: kPrimaryOrangeColor),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          icon: Icon(Icons.search, color: kPrimaryOrangeColor),
+          suffixIcon: widget.text.isNotEmpty
+              ? GestureDetector(
+            child: Icon(Icons.close, color:kPrimaryOrangeColor),
+            onTap: () {
+              controller.clear();
+              widget.onChanged('');
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+          )
+              : null,
+          hintText: widget.hintText,
+          hintStyle: style,
+          border: InputBorder.none,
+        ),
+        style: style,
+        onChanged: widget.onChanged,
       ),
     );
   }
 }
+Widget _nameProduct({String name, BuildContext context}) {
+  Size size = MediaQuery.of(context).size;
 
-class SearchResultsListView extends StatelessWidget {
-  final String searchTerm;
+  return Container(
+    padding: EdgeInsets.only(bottom: 5),
+    width: size.width / 2.117647058823529,
+    child: Text(
+      name,
+      softWrap: true,
+      maxLines: 3,
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+    ),
+  );
+}
 
-  const SearchResultsListView({
-    Key key,
-    @required this.searchTerm,
-  }) : super(key: key);
+Widget _priceProduct({String pricee, BuildContext context}) {
+  return Text("₫${price.format(int.parse(pricee))}");
+}
 
-  @override
-  Widget build(BuildContext context) {
-    if (searchTerm == null) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.search,
-              size: 64,
-            ),
-            Text(
-              'Start searching',
-              style: Theme.of(context).textTheme.headline5,
-            )
-          ],
-        ),
-      );
-    }
+Widget _nameAuthor({String author, BuildContext context}) {
+  Size size = MediaQuery.of(context).size;
 
-    final fsb = FloatingSearchBar.of(context);
+  return Container(
+    padding: EdgeInsets.only(bottom: 5),
+    width: size.width / 2.117647058823529,
+    child: Text(
+      author,
+      softWrap: true,
+      maxLines: 2,
+      style: TextStyle(
+          fontSize: 14, color: kPrimaryGrayColor, fontWeight: FontWeight.bold),
+    ),
+  );
+}
 
-    return ListView(
-      padding: EdgeInsets.only(top: fsb.height + fsb.margins.vertical),
-      children: List.generate(
-        50,
-            (index) => ListTile(
-          title: Text('$searchTerm search result'),
-          subtitle: Text(index.toString()),
-        ),
-      ),
-    );
-  }
+Widget _imageProduct({String url, BuildContext context}) {
+  Size size = MediaQuery.of(context).size;
+
+  return Container(
+    padding: EdgeInsets.only(right: 21),
+    height: size.height / 5.333333333333333,
+    width: size.width / 3.6,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        image: DecorationImage(image: NetworkImage(url)),
+        boxShadow: [
+          BoxShadow(
+            color: kPrimaryGrayColor.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 12,
+            offset: Offset(0, 3),
+          )
+        ]),
+  );
 }

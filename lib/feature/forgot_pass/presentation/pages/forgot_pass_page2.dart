@@ -26,8 +26,8 @@ class _ForgotPassPage2State extends State<ForgotPassPage2> {
             color: kPrimaryOrangeColor,
           ),
           onPressed: () {
-            // Navigator.of(context).pop();
-            Navigator.pushReplacementNamed(context, PageRoutes.forgotPassPage);
+             Navigator.of(context).pop();
+
           },
         ),
         backgroundColor: Colors.transparent,

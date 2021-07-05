@@ -82,6 +82,7 @@ Future<bool> changeProfile(
     body: body,
   );
   log("Put ChangeProfile:" + "$mainUrl/account/changeinformation");
+  log("Body put ChangeProfile"+body);
   log("Response Put ChangeProfile: ${response.statusCode}");
   if (response.statusCode == 200 || response.statusCode == 201) {
     function();

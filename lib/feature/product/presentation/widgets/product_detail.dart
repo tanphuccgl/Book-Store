@@ -117,7 +117,7 @@ class _ProductDetailState extends State<ProductDetail> {
                           context: context,
                           title: "",
                           onPressed2: () {
-                            Navigator.pushReplacementNamed(
+                            Navigator.pushNamed(
                                 context, PageRoutes.cartPage);
                           })),
                 ],

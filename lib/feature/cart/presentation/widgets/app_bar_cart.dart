@@ -14,14 +14,14 @@ Widget appBarCart({BuildContext context,String item}) {
         color: kPrimaryOrangeColor,
       ),
       onPressed: () {
-        Navigator.pushReplacementNamed(context, PageRoutes.homePage);
+       Navigator.pop(context);
       },
     ),
     title: Column(
       children: [
         Text(
           "Your Cart",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(),
         ),
         Text(
          item,

@@ -36,7 +36,7 @@ class _BodyForgotPassState extends State<BodyForgotPass> {
                   Text(
                     "Forgot Password",
                     style: TextStyle(
-                        color: kPrimaryBlackColor,
+
                         fontSize: 25,
                         fontWeight: FontWeight.w700),
                   ),
@@ -58,7 +58,7 @@ class _BodyForgotPassState extends State<BodyForgotPass> {
                       style: TextStyle(color: kPrimaryBlackColor),
                       maxLines: 1,
                       obscureText: false,
-                      // keyboardType: TextInputType.emailAddress,
+                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(20),
                         fillColor: Colors.grey.shade200,
@@ -103,7 +103,7 @@ class _BodyForgotPassState extends State<BodyForgotPass> {
                           postForgotPw(
                               email: email,
                               function: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                     context,
                                     new MaterialPageRoute(
                                         builder: (context) => ForgotPassPage2(

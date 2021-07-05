@@ -93,7 +93,7 @@ class _ItemCartedWidgetState extends State<ItemCartedWidget> {
           tenSach,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+             fontWeight: FontWeight.bold, fontSize: 16),
           maxLines: 1,
         ),
       ),
@@ -106,7 +106,7 @@ class _ItemCartedWidgetState extends State<ItemCartedWidget> {
       child: Text.rich(
         TextSpan(
           text: "₫${price.format(int.parse(giaBia))}",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(),
         ),
       ),
     );
@@ -122,7 +122,7 @@ class _ItemCartedWidgetState extends State<ItemCartedWidget> {
         child: Text(
           "${amount} products",
           style: TextStyle(
-            color: Colors.black,
+
           ),
           maxLines: 1,
         ),
@@ -140,7 +140,7 @@ class _ItemCartedWidgetState extends State<ItemCartedWidget> {
         child: Text(
           "Date: ${DateTime.parse(date)} ",
           style: TextStyle(
-            color: Colors.black,
+
           ),
           maxLines: 1,
         ),

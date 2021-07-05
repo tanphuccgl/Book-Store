@@ -34,7 +34,7 @@ class _ChangeThemePageState extends State<ChangeThemePage> {
             color: kPrimaryOrangeColor,
           ),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, PageRoutes.settingsPage);
+           Navigator.pop(context);
           },
         ),
       ),

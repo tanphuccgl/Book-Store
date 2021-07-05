@@ -23,20 +23,27 @@ class _BottomBarState extends State<BottomBar> {
     switch (index) {
       case 0:
         try {
-          Navigator.pushReplacementNamed(context, PageRoutes.homePage);
+          Navigator.pushNamedAndRemoveUntil(context, PageRoutes.homePage,(Route<dynamic> route) => false);
+      //    Navigator.pushReplacementNamed(context, PageRoutes.homePage);
         } catch (e) {
           print(e.toString());
         }
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, PageRoutes.kindOfBookPage);
+        Navigator.pushNamedAndRemoveUntil(context, PageRoutes.kindOfBookPage,(Route<dynamic> route) => false);
+
+      //  Navigator.pushReplacementNamed(context, PageRoutes.kindOfBookPage);
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, PageRoutes.chatPage);
+        Navigator.pushNamedAndRemoveUntil(context, PageRoutes.chatPage,(Route<dynamic> route) => false);
+
+     //   Navigator.pushReplacementNamed(context, PageRoutes.chatPage);
         break;
 
       case 3:
-        Navigator.pushReplacementNamed(context, PageRoutes.profilePage);
+        Navigator.pushNamedAndRemoveUntil(context, PageRoutes.profilePage,(Route<dynamic> route) => false);
+
+       // Navigator.pushReplacementNamed(context, PageRoutes.profilePage);
         break;
     }
   }

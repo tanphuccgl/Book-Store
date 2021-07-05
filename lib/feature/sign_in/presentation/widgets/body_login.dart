@@ -75,10 +75,8 @@ class _BodyLoginState extends State<BodyLogin> {
                   _failed(),
                   _stayAndForgot(
                     value1: _checkBox,
-
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, PageRoutes.forgotPassPage);
+                      Navigator.pushNamed(context, PageRoutes.forgotPassPage);
                     },
                   ),
                   _button(
@@ -159,10 +157,8 @@ class _BodyLoginState extends State<BodyLogin> {
                       obscureText: _isVisible),
                   _stayAndForgot(
                     value1: _checkBox,
-
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, PageRoutes.forgotPassPage);
+                      Navigator.pushNamed(context, PageRoutes.forgotPassPage);
                     },
                   ),
                   _button(
@@ -254,7 +250,8 @@ class _BodyLoginState extends State<BodyLogin> {
 
   void inHome() {
     Future.delayed(Duration.zero, () async {
-      Navigator.pushReplacementNamed(context, PageRoutes.homePage);
+      Navigator.pushNamedAndRemoveUntil(
+          context, PageRoutes.homePage, (Route<dynamic> route) => false);
     });
   }
 
@@ -365,7 +362,7 @@ class _BodyLoginState extends State<BodyLogin> {
     );
   }
 
-  Widget _stayAndForgot({bool value1,  Function onPressed}) {
+  Widget _stayAndForgot({bool value1, Function onPressed}) {
     return Container(
       padding: EdgeInsets.only(top: 10, right: 15),
       child: Row(
@@ -382,7 +379,6 @@ class _BodyLoginState extends State<BodyLogin> {
                     value: value1,
                     onChanged: (value) {
                       setState(() {
-
                         value1 = value;
                       });
                     },
@@ -481,10 +477,7 @@ Widget title({String title}) {
       children: [
         Text(
           title,
-          style: TextStyle(
-              color: kPrimaryBlackColor,
-              fontSize: 25,
-              fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
         ),
       ],
     ),

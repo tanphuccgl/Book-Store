@@ -38,7 +38,7 @@ class _Product1DetailPageState extends State<Product1DetailPage> {
                   context: context,
                   title: "SkyBooks",
                   onPressed2: () {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushNamed(
                         context, PageRoutes.cartPage);
                   }),
               searchBarKindOfBook(

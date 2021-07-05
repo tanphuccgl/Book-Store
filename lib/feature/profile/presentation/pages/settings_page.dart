@@ -30,8 +30,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: kPrimaryOrangeColor,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, PageRoutes.profilePage);
+                    Navigator.pop(context);
+
                   },
                 ),
               ],
@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: kPrimaryWhiteColor,fontWeight: FontWeight.bold
                       ),
                     ),
-                    onTap: () {   Navigator.pushReplacementNamed(context, PageRoutes.changePwPage);},
+                    onTap: () {   Navigator.pushNamed(context, PageRoutes.changePwPage);},
                   ),
                 ),
                 Container(
@@ -104,7 +104,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: kPrimaryWhiteColor,fontWeight: FontWeight.bold
                       ),
                     ),
-                    onTap: () {   Navigator.pushReplacementNamed(context, PageRoutes.changeThemePage);},
+                    onTap: () {   Navigator.pushNamed(context, PageRoutes.changeThemePage);},
                   ),
                 ),
               ],

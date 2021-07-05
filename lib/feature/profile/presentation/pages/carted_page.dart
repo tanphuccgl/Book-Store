@@ -46,8 +46,7 @@ class _CartedPageState extends State<CartedPage> {
                     color: kPrimaryOrangeColor,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, PageRoutes.profilePage);
+                   Navigator.pop(context);
                   },
                 ),
               ],
@@ -59,7 +58,7 @@ class _CartedPageState extends State<CartedPage> {
                   title: "Purchase Order",
                   onPressed2: () {
                     setState(() {
-                      Navigator.pushReplacementNamed(context, PageRoutes.cartPage);
+                      Navigator.pushNamed(context, PageRoutes.cartPage);
                     });
                   },
                 )),

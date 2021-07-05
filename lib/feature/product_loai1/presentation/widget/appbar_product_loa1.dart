@@ -12,7 +12,7 @@ Widget appBarProductLoai({BuildContext context}){
         color: kPrimaryOrangeColor,
       ),
       onPressed: () {
-        Navigator.pushReplacementNamed(context, PageRoutes.kindOfBookPage);
+      Navigator.pop(context);
       },
     ),
     elevation: 0,

@@ -8,8 +8,8 @@ import 'package:book_store/feature/cart/presentation/pages/cart_page.dart';
 import 'package:book_store/feature/chat/presentation/pages/chat_page.dart';
 import 'package:book_store/feature/forgot_pass/presentation/pages/forgot_pass_page.dart';
 import 'package:book_store/feature/forgot_pass/presentation/pages/forgot_pass_page2.dart';
-import 'package:book_store/feature/onboarding/pages/onboading_screen.dart';
-import 'package:book_store/feature/onboarding/pages/onboarding_page.dart';
+import 'package:book_store/feature/onboarding/pages/onboading_page.dart';
+import 'package:book_store/feature/onboarding/pages/onboarding_screen.dart';
 import 'package:book_store/feature/product/presentation/pages/home_page.dart';
 import 'package:book_store/feature/product/presentation/pages/kind_of_book_page.dart';
 import 'package:book_store/feature/product/presentation/widgets/product_detail.dart';
@@ -21,6 +21,7 @@ import 'package:book_store/feature/product_loai5/presentation/pages/product5_det
 import 'package:book_store/feature/product_loai6/presentation/pages/product6_details_page.dart';
 import 'package:book_store/feature/product_loai7/presentation/pages/product7_details_page.dart';
 import 'package:book_store/feature/profile/data/models/profile_data.dart';
+import 'package:book_store/feature/profile/presentation/pages/about_us_page.dart';
 import 'package:book_store/feature/profile/presentation/pages/carted_page.dart';
 import 'package:book_store/feature/profile/presentation/pages/change_pw_page.dart';
 import 'package:book_store/feature/profile/presentation/pages/change_theme_page.dart';
@@ -108,6 +109,8 @@ class _MyAppState extends State<MyApp> {
               PageRoutes.forgotPassPage2: (context) => ForgotPassPage2(),
               PageRoutes.cartedPage: (context) => CartedPage(),
               PageRoutes.changeThemePage: (context) => ChangeThemePage(),
+              PageRoutes.aboutUsPage: (context) => AboutUsPage(),
+
             },
           );
         },

@@ -3,8 +3,8 @@ import 'package:book_store/feature/cart/presentation/pages/cart_page.dart';
 import 'package:book_store/feature/chat/presentation/pages/chat_page.dart';
 import 'package:book_store/feature/forgot_pass/presentation/pages/forgot_pass_page.dart';
 import 'package:book_store/feature/forgot_pass/presentation/pages/forgot_pass_page2.dart';
-import 'package:book_store/feature/onboarding/pages/onboading_screen.dart';
-import 'package:book_store/feature/onboarding/pages/onboarding_page.dart';
+import 'package:book_store/feature/onboarding/pages/onboading_page.dart';
+import 'package:book_store/feature/onboarding/pages/onboarding_screen.dart';
 import 'package:book_store/feature/product/presentation/pages/home_page.dart';
 import 'package:book_store/feature/product/presentation/pages/kind_of_book_page.dart';
 import 'package:book_store/feature/product/presentation/widgets/product_detail.dart';
@@ -15,6 +15,7 @@ import 'package:book_store/feature/product_loai4/presentation/pages/product4_det
 import 'package:book_store/feature/product_loai5/presentation/pages/product5_details_page.dart';
 import 'package:book_store/feature/product_loai6/presentation/pages/product6_details_page.dart';
 import 'package:book_store/feature/product_loai7/presentation/pages/product7_details_page.dart';
+import 'package:book_store/feature/profile/presentation/pages/about_us_page.dart';
 import 'package:book_store/feature/profile/presentation/pages/carted_page.dart';
 import 'package:book_store/feature/profile/presentation/pages/change_pw_page.dart';
 import 'package:book_store/feature/profile/presentation/pages/change_theme_page.dart';
@@ -51,6 +52,8 @@ class PageRoutes{
   static const String forgotPassPage2=ForgotPassPage2.routeName;
   static const String cartedPage=CartedPage.routeName;
   static const String changeThemePage=ChangeThemePage.routeName;
+  static const String aboutUsPage=AboutUsPage.routeName;
+
 
 
 }
