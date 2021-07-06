@@ -15,14 +15,14 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
 
 
   DateTime date;
-  var formatter = new DateFormat('dd-MM-yyyy');
+  var formatter = new DateFormat('yyyy-dd-MM');
 
   String getText() {
     if (date == null) {
       return 'Select Date';
     } else {
-      widget.data.data.dateBirth=DateFormat('MM/dd/yyyy').format(date);
-      return DateFormat('MM/dd/yyyy').format(date);
+      widget.data.data.dateBirth=DateFormat('yyyy-dd-MM').format(date);
+      return DateFormat('yyyy-dd-MM').format(date);
       // return '${date.month}/${date.day}/${date.year}';
     }
   }
@@ -36,7 +36,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
 print("Aaa");
       }else
         { print("bbb");
-          date=DateFormat("MM/dd/yyyy").parse(widget.data.data.dateBirth);
+          date=DateFormat("yyyy-dd-MM").parse(widget.data.data.dateBirth);
 
 
         }
